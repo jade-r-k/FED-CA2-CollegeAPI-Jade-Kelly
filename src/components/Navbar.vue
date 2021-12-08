@@ -11,7 +11,7 @@
                 <b-navbar-item tag="router-link" :to="{ path: '/courses/index' }">
                     Courses
                 </b-navbar-item>
-                <b-navbar-item href="#">
+                <b-navbar-item tag="router-link" :to="{ path: '/lecturers/index' }">
                     Lecturers
                 </b-navbar-item>
                 <b-navbar-item href="#">

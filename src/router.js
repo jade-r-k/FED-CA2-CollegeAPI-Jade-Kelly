@@ -45,5 +45,29 @@ export default new Router({
       },
       ///////////////////
       /////////////////
+
+      /////LECTURERS/////
+      ///LECTURERS INDEX///
+      {
+        path: "/lecturers/index",
+        name: "lecturers_index",
+        component: () => import("./pages/lecturers/LecturersIndex.vue")
+      },
+      ///////////////////
+      ///LECTURERS CREATE///
+      {
+        path: "/lecturers/create",
+        name: "lecturer_create",
+        component: () => import("./pages/lecturers/CreateLecturer.vue")
+      },
+      ///////////////////
+      ///LECTURERS SHOW///
+      {
+        path: "/lecturers/show",
+        name: "lecturers_show",
+        component: () => import("./pages/lecturers/LecturersShow.vue")
+      },
+      ///////////////////
+      /////////////////
     ]
 });
