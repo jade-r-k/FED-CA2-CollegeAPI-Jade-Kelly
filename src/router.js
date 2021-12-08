@@ -21,5 +21,22 @@ export default new Router({
         component: () => import("./pages/Login.vue")
       },
       ///////////////
+
+      /////COURSES/////
+      ///COURSES INDEX///
+      {
+        path: "/courses/index",
+        name: "courses_index",
+        component: () => import("./pages/courses/CoursesIndex.vue")
+      },
+      ///////////////////
+      ///COURSES SHOW///
+      {
+        path: "/courses/show",
+        name: "courses_show",
+        component: () => import("./pages/courses/CoursesShow.vue")
+      },
+      ///////////////////
+      /////////////////
     ]
 });
