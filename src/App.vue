@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div id="app">
     <Navbar />
+    <br>
     <div class="container">
       <router-view />
     </div>
+    <br>
     <Footer />
   </div>
 </template>
@@ -35,5 +37,4 @@ export default {
 </script>
 
 <style>
-
 </style>
