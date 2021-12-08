@@ -30,6 +30,13 @@ export default new Router({
         component: () => import("./pages/courses/CoursesIndex.vue")
       },
       ///////////////////
+      ///COURSES CREATE///
+      {
+        path: "/courses/create",
+        name: "course_create",
+        component: () => import("./pages/courses/CreateCourse.vue")
+      },
+      ///////////////////
       ///COURSES SHOW///
       {
         path: "/courses/show",

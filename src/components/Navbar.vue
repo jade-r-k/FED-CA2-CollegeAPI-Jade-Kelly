@@ -21,13 +21,15 @@
 
             <template #end>
                 <div v-if="!loggedIn">
-                    <b-navbar-item tag="router-link" :to="{ path: '/login' }">
+                    <b-navbar-item>
+                        <b-navbar-item tag="router-link" :to="{ path: '/login' }">
                         <Icon style="margin-right: 4px" icon="carbon:login" />
                         Login
                     </b-navbar-item>
                     <b-navbar-item href="#">
                         <Icon style="margin-right: 4px" icon="carbon:user-follow" />
                         Register
+                    </b-navbar-item>
                     </b-navbar-item>
                 </div>
                 <b-navbar-item v-else @click="logout">

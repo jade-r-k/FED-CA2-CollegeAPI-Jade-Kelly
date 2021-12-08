@@ -2,6 +2,9 @@
     <div>
         <div style="text-align: center;">
             <p class="title">Courses</p>
+            <section>
+                <b-button @click="createCourse">Create New Course</b-button>
+            </section>
         </div>
         <b-table :data="data" :columns="columns" @select="selected" striped focusable>
         </b-table>
@@ -55,7 +58,17 @@
                     .catch(error => console.log(error))
             },
             selected(data) {
-                this.$router.push({name: 'courses_show', params: { id: data.id }})
+                this.$router.push({
+                    name: 'courses_show',
+                    params: {
+                        id: data.id
+                    }
+                })
+            },
+            createCourse() {
+                this.$router.push({
+                    name: 'course_create'
+                })
             }
         }
     }
