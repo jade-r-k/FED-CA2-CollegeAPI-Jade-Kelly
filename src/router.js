@@ -37,9 +37,16 @@ export default new Router({
         component: () => import("./pages/courses/CreateCourse.vue")
       },
       ///////////////////
+      ///COURSES CREATE///
+      {
+        path: "/courses/:id/edit",
+        name: "course_edit",
+        component: () => import("./pages/courses/EditCourse.vue")
+      },
+      ///////////////////
       ///COURSES SHOW///
       {
-        path: "/courses/show",
+        path: "/courses/:id",
         name: "courses_show",
         component: () => import("./pages/courses/CoursesShow.vue")
       },
@@ -63,7 +70,7 @@ export default new Router({
       ///////////////////
       ///LECTURERS SHOW///
       {
-        path: "/lecturers/show",
+        path: "/lecturers/:id",
         name: "lecturers_show",
         component: () => import("./pages/lecturers/LecturersShow.vue")
       },

@@ -4,8 +4,13 @@
 
     <p>
         {{ course.title }}
+        <br>
         {{ course.description }}
     </p>
+    <br>
+    <section>
+        <b-button @click="editCourse">Edit</b-button>
+    </section>
   </div>
 </template>
 
@@ -43,7 +48,12 @@ export default {
             console.log(error)
            // this.$emit('invalid-token')
           })
-      }
+      },
+      editCourse() {
+                this.$router.push({
+                    name: 'course_edit'
+                })
+            }
   }
 }
 </script>
