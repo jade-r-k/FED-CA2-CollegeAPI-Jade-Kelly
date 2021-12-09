@@ -83,5 +83,36 @@ export default new Router({
       },
       ///////////////////
       /////////////////
+
+      /////ENROLMEMTS/////
+      ///ENROLMENTS INDEX///
+      {
+        path: "/enrolments/index",
+        name: "enrolments_index",
+        component: () => import("./pages/enrolments/EnrolmentsIndex.vue")
+      },
+      ///////////////////
+      ///ENROLMENTS CREATE///
+      {
+        path: "/enrolments/create",
+        name: "enrolment_create",
+        component: () => import("./pages/enrolments/CreateEnrolment.vue")
+      },
+      ///////////////////
+      ///ENROLMENTS EDIT///
+      {
+        path: "/enrolments/:id/edit",
+        name: "enrolment_edit",
+        component: () => import("./pages/enrolments/EditEnrolment.vue")
+      },
+      ///////////////////
+      ///ENROLMENTS SHOW///
+      {
+        path: "/enrolments/:id",
+        name: "enrolments_show",
+        component: () => import("./pages/enrolments/EnrolmentsShow.vue")
+      },
+      ///////////////////
+      ////////////////
     ]
 });
