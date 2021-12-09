@@ -11,6 +11,9 @@
     <section>
         <b-button @click="editCourse">Edit</b-button>
     </section>
+    <section>
+        <b-button @click="deleteCourse">Delete</b-button>
+    </section>
   </div>
 </template>
 
@@ -48,6 +51,28 @@ export default {
             console.log(error)
            // this.$emit('invalid-token')
           })
+      },
+      deleteCourse() {
+          let token = localStorage.getItem('token')
+          
+          if(confirm("Do you really want to delete?")){
+              axios.delete(`/courses/${this.$route.params.id}`,
+          {
+              headers: {
+                  "Authorization" : `Bearer ${token}`
+                  }
+          })
+          .then(response => {
+              console.log(response.data)
+              this.$router.push({
+                        name: "courses_index"
+                    })
+          })
+          .catch(error =>  {
+            console.log(error)
+           // this.$emit('invalid-token')
+          })
+          }
       },
       editCourse() {
                 this.$router.push({
