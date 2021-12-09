@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <section>
+  <div>
+      <h2>Edit Lecturer</h2>
+      <section>
             <b-field label="Name" >
                 <b-input v-model="form.name"></b-input>
             </b-field>
@@ -18,34 +19,52 @@
                 <b-button @click="cancel()">Cancel</b-button>
             </section>
         </section>
-    </div>
+  </div>
 </template>
 
 <script>
 import axios from '@/config'
 
-    export default {
-        name: 'CreateCourses',
-        data() {
+export default {
+  name: 'EditCourse',
+  data() {
             return {
                 form: {
-                    name: "",
-                    address: "",
+                    name: '',
+                    address: '',
                     phone: '',
-                    email: ""
+                    email: ''
                 }
             }
         },
+        mounted(){
+            this.getData()
+        },
         methods: {
+            getData() {
+                let token = localStorage.getItem('token')
+			axios
+				.get(`/lecturers/${this.$route.params.id}`,
+				{
+					headers: {
+						"Authorization" : `Bearer ${token}`
+					}
+				})
+				.then(response => {
+						console.log(response.data)
+                        
+                        this.form.name = response.data.data.name
+                        this.form.address = response.data.data.address
+                        this.form.phone = response.data.data.phone
+                        this.form.email = response.data.data.email
+					}
+				)
+				.catch(error => console.log(error))
+            },
             submitForm() {
                 let token = localStorage.getItem('token')
                 
-                axios.post('/lecturers', {
-                    name: this.form.name,
-                    address: this.form.address,
-                    phone: this.form.phone,
-                    email: this.form.email
-                }, {
+                axios.put(`/lecturers/${this.$route.params.id}`, this.form, {
                     headers: {
                   "Authorization" : `Bearer ${token}`
                   }
@@ -53,7 +72,10 @@ import axios from '@/config'
                 .then(response =>{
                     console.log(response.data)
                     this.$router.push({
-                        name: "lecturers_index"
+                        name: "lecturers_show",
+                        params: {
+                            id: this.$route.params.id
+                        }
                     })
                 })
                 .catch(error => {
@@ -65,7 +87,7 @@ import axios from '@/config'
                 this.$router.go(-1)
             }
         }
-    }
+}
 </script>
 
 <style scoped>

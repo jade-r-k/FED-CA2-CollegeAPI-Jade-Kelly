@@ -5,6 +5,11 @@
     <p>
         {{ lecturer.name }}
     </p>
+    <br>
+    <section>
+        <b-button @click="editLecturer">Edit</b-button>
+        <b-button @click="deleteLecturer">Delete</b-button>
+    </section>
   </div>
 </template>
 
@@ -42,7 +47,34 @@ export default {
             console.log(error)
            // this.$emit('invalid-token')
           })
-      }
+      },
+      deleteLecturer() {
+          let token = localStorage.getItem('token')
+          
+          if(confirm(`Are you sure you want to delete '${this.lecturer.name}'`)){
+              axios.delete(`/lecturers/${this.$route.params.id}`,
+          {
+              headers: {
+                  "Authorization" : `Bearer ${token}`
+                  }
+          })
+          .then(response => {
+              console.log(response.data)
+              this.$router.push({
+                        name: "lecturers_index"
+                    })
+          })
+          .catch(error =>  {
+            console.log(error)
+           // this.$emit('invalid-token')
+          })
+          }
+      },
+      editLecturer() {
+                this.$router.push({
+                    name: 'lecturer_edit'
+                })
+            }
   }
 }
 </script>
