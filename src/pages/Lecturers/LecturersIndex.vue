@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div style="text-align: center;">
+        <div v-if="!loggedIn">
+            <p class="subtitle">Please login or register in order to use the services available.</p>
+        </div>
+        <div v-else>
+            <div style="text-align: center;">
             <p class="title">Lecturers</p>
             <section>
                 <b-button @click="createLecturer">Create New Lecturer</b-button>
@@ -8,11 +12,13 @@
         </div>
         <b-table :data="data" :columns="columns" @select="selected" striped focusable>
         </b-table>
+        </div>
     </div>
 </template>
 
 <script>
     import axios from '@/config'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'LecturersIndex',
@@ -28,16 +34,17 @@
                     {
                         field: 'email',
                         label: 'Email',
-                        sortable: true
                     },
                     {
                         field: 'phone',
                         label: 'Phone',
-                        sortable: true
                     },
                 ]
             }
         },
+        computed: {
+		...mapState(['loggedIn'])
+	},
         mounted() {
             this.getData()
         },
