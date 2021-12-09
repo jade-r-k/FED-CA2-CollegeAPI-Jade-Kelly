@@ -14,7 +14,7 @@
         </b-field>
             <b-field label="Select time">
             <b-clockpicker
-                v-model="form.time"
+                v-model="selected_time"
                 placeholder="Click to select..."
                 :hour-format="format">
 
@@ -69,6 +69,7 @@
 
 <script>
 import axios from '@/config'
+import moment from 'moment'
 
     export default {
         name: 'CreateEnrolment',
@@ -77,9 +78,10 @@ import axios from '@/config'
                 courses: [],
                 lecturers: [],
                 selected_date: new Date(),
+                selected_time: new Date(),
                 form: {
-                    date: '',
-                    time: new Date(),
+                    date: moment(this.selected_date).format('YYYY-MM-DD'),
+                    time: moment(this.selected_time).format('HH:MM:SS'),
                     status: '',
                     course_id: 0,
                     lecturer_id: 0
