@@ -52,7 +52,7 @@ export default {
            // this.$emit('invalid-token')
           })
       },
-      deleteCourse() {
+      deleteEnrolment() {
           let token = localStorage.getItem('token')
           
           if(confirm("Do you really want to delete?")){
@@ -74,7 +74,7 @@ export default {
           })
           }
       },
-      editCourse() {
+      editEnrolment() {
                 this.$router.push({
                     name: 'enrolment_edit'
                 })

@@ -5,7 +5,7 @@
             <b-datepicker
                 v-model="selected_date"
                 :show-week-number="showWeekNumber"
-                locale="fr-CA"
+                locale="en-GB"
                 placeholder="Click to select..."
                 icon="calendar-today"
                 icon-right-clickable
@@ -149,6 +149,7 @@ import moment from 'moment'
                 .catch(error => {
                     console.log(error)
                     console.log(error.response.data)
+                    alert("There was a problem making this enrolement. Check if the lecturer is already enroled to a course.")
                     })
             },
             cancel() {
