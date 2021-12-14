@@ -50,25 +50,59 @@ export default {
       },
       deleteLecturer() {
           let token = localStorage.getItem('token')
-          
-          if(confirm(`Are you sure you want to delete '${this.lecturer.name}'`)){
-              axios.delete(`/lecturers/${this.$route.params.id}`,
-          {
-              headers: {
-                  "Authorization" : `Bearer ${token}`
-                  }
-          })
-          .then(response => {
-              console.log(response.data)
-              this.$router.push({
-                        name: "lecturers_index"
-                    })
-          })
-          .catch(error =>  {
-            console.log(error)
-           // this.$emit('invalid-token')
-          })
-          }
+
+          if (this.lecturer.enrolments.length === 0) {
+                    if (confirm("Do you really want to delete?")) {
+                        axios.delete(`/lecturers/${this.$route.params.id}`, {
+                                headers: {
+                                    "Authorization": `Bearer ${token}`
+                                }
+                            })
+                            .then(response => {
+                                console.log(response.data)
+                                this.$router.push({
+                                    name: "lecturers_index"
+                                })
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                // this.$emit('invalid-token')
+                            })
+                    }
+                } else {
+                    if (confirm(
+                            "This lecturer has enrolments. Do you want to delete this lecturer and all their enrolements?"
+                        )) {
+                        this.lecturer.enrolments.forEach((enrolment) => {
+                            axios
+                                .delete(`/enrolments/${enrolment.id}`, {
+                                    headers: {
+                                        "Authorization": `Bearer ${token}`
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                });
+                        });
+
+                        axios.delete(`/lecturers/${this.$route.params.id}`, {
+                                headers: {
+                                    "Authorization": `Bearer ${token}`
+                                }
+                            })
+                            .then(response => {
+                                console.log(response.data)
+                                this.$router.push({
+                                    name: "lecturers_index"
+                                })
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                // this.$emit('invalid-token')
+                            })
+
+                    }
+                }
       },
       editLecturer() {
                 this.$router.push({
