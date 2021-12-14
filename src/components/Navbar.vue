@@ -1,39 +1,41 @@
 <template>
     <div>
-        <b-navbar>
+        <b-navbar style="background-color: #E0D8DE">
             <template #brand>
                 <b-navbar-item tag="router-link" :to="{ path: '/' }">
                     <Icon icon="twemoji:books" width="36" height="36" />
-                    <p class="title is-4" style="margin-left: 10px">FED College</p>
+                    <p class="title is-4" style="margin-left: 10px; color: #6A6262;">FED College</p>
                 </b-navbar-item>
             </template>
             <template #start>
-                <b-navbar-item tag="router-link" :to="{ path: '/courses/index' }">
-                    Courses
-                </b-navbar-item>
-                <b-navbar-item tag="router-link" :to="{ path: '/lecturers/index' }">
-                    Lecturers
-                </b-navbar-item>
-                <b-navbar-item tag="router-link" :to="{ path: '/enrolments/index' }">
-                    Enrolements
+                <b-navbar-item tag="div">
+                    <b-navbar-item tag="router-link" :to="{ path: '/courses/index' }">
+                        Courses
+                    </b-navbar-item>
+                    <b-navbar-item tag="router-link" :to="{ path: '/lecturers/index' }">
+                        Lecturers
+                    </b-navbar-item>
+                    <b-navbar-item tag="router-link" :to="{ path: '/enrolments/index' }">
+                        Enrolements
+                    </b-navbar-item>
                 </b-navbar-item>
             </template>
 
             <template #end>
                 <div v-if="!loggedIn">
-                    <b-navbar-item>
+                    <b-navbar-item tag="div">
                         <b-navbar-item tag="router-link" :to="{ path: '/login' }">
-                        <Icon style="margin-right: 4px" icon="carbon:login" />
-                        Login
-                    </b-navbar-item>
-                    <b-navbar-item href="#">
-                        <Icon style="margin-right: 4px" icon="carbon:user-follow" />
-                        Register
-                    </b-navbar-item>
+                            <Icon style="margin-right: 4px;" icon="carbon:login" color="#6a6262" />
+                            Login
+                        </b-navbar-item>
+                        <b-navbar-item href="#">
+                            <Icon style="margin-right: 4px;" icon="carbon:user-follow" color="#6a6262" />
+                            Register
+                        </b-navbar-item>
                     </b-navbar-item>
                 </div>
                 <b-navbar-item v-else @click="logout">
-                    <Icon style="margin-right: 4px" icon="carbon:logout" />
+                    <Icon style="margin-right: 4px;" icon="carbon:logout" />
                     Logout
                 </b-navbar-item>
             </template>
@@ -42,7 +44,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+    import {
+        mapState
+    } from 'vuex'
 
     import {
         Icon
@@ -59,10 +63,14 @@ import { mapState } from 'vuex'
             }
         },
         computed: {
-    ...mapState(['loggedIn'])
-  },
+            ...mapState(['loggedIn'])
+        },
     }
 </script>
 
 <style scoped>
+a:hover {
+  background-color: #EAE2E8;
+  color: #53A2BE;
+}
 </style>
