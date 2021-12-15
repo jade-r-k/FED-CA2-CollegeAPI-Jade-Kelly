@@ -1,19 +1,28 @@
 <template>
     <div>
-        <h2>Show Course Page</h2>
-
-        <p>
-            {{ course.title }}
-            <br>
-            {{ course.description }}
-        </p>
+        <p class="title" style="text-align: center; color: #714dd2;">{{ course.title }}</p>
         <br>
-        <section>
-            <b-button @click="editCourse">Edit</b-button>
-        </section>
-        <section>
-            <b-button @click="deleteCourse">Delete</b-button>
-        </section>
+        <div class="columns is-mobile" style="text-align: center;">
+            <div class="card column is-half is-offset-one-quarter">
+                <p class="subtitle">Code: {{ course.code }}</p>
+                <p class="subtitle">Points: {{ course.points }}</p>
+                <p class="subtitle">Level: {{ course.level }}</p>
+                <div class="content">
+                    <p class="subtitle">Description:</p>
+                    {{ course.description }}
+                </div>
+                <div class="buttons is-centered">
+                    <b-button @click="editCourse" type="is-success">Edit</b-button>
+                    <b-button @click="deleteCourse" type="is-danger">Delete</b-button>
+                    <b-button @click="previousPage" type="is-primary">Return</b-button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <p class="subtitle" style="text-align: center;">Enrolments</p>
+        <p v-if="this.course.enrolments.length === 0" style="text-align: center;">This course has no enrolments</p>
+        <b-table v-else :data="course.enrolments" :columns="columns" striped>
+        </b-table>
     </div>
 </template>
 
@@ -25,7 +34,23 @@
         components: {},
         data() {
             return {
-                course: {}
+                course: {},
+                columns: [{
+                        field: 'id',
+                        label: 'ID',
+                        sortable: true
+                    },
+                    {
+                        field: 'status',
+                        label: 'Status',
+                        sortable: true
+                    },
+                    {
+                        field: 'lecturer.name',
+                        label: 'Lecturer',
+                        sortable: true,
+                    }
+                ]
             }
         },
         mounted() {
@@ -110,6 +135,9 @@
                 this.$router.push({
                     name: 'course_edit'
                 })
+            },
+            previousPage() {
+                this.$router.go(-1)
             }
         }
     }

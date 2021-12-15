@@ -1,19 +1,20 @@
 <template>
   <div>
-      <h2>Show Enrolment Page</h2>
-
-    <p>
-        {{ enrolment.id }}
+      <p class="title" style="text-align: center; color: #714dd2;">Enrolment</p>
         <br>
-        {{ enrolment.status }}
-    </p>
-    <br>
-    <section>
-        <b-button @click="editEnrolment">Edit</b-button>
-    </section>
-    <section>
-        <b-button @click="deleteEnrolment">Delete</b-button>
-    </section>
+        <div class="columns is-mobile" style="text-align: center;">
+            <div class="card column is-half is-offset-one-quarter">
+                <p class="subtitle">Status: {{ enrolment.status }}</p>
+                <p class="subtitle">Lecturer: {{ enrolment.lecturer.name }}</p>
+                <p class="subtitle">Course: {{ enrolment.course.title }}</p>
+                <p class="subtitle">Date/Time: {{ enrolment.date }} {{ enrolment.time }}</p>
+                <div class="buttons is-centered">
+                    <b-button @click="editEnrolment" type="is-success">Edit</b-button>
+                    <b-button @click="deleteEnrolment" type="is-danger">Delete</b-button>
+                    <b-button @click="previousPage" type="is-primary">Return</b-button>
+                </div>
+            </div>
+        </div>
   </div>
 </template>
 
@@ -78,6 +79,9 @@ export default {
                 this.$router.push({
                     name: 'enrolment_edit'
                 })
+            },
+            previousPage() {
+                this.$router.go(-1)
             }
   }
 }

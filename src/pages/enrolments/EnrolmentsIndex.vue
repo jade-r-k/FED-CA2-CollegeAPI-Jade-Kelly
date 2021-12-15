@@ -28,11 +28,7 @@
         data() {
             return {
                 data: [],
-                columns: [{
-                        field: 'id',
-                        label: 'ID',
-                        sortable: true
-                    },
+                columns: [
                     {
                         field: 'status',
                         label: 'Status',
