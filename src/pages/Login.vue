@@ -1,13 +1,25 @@
 <template>
-    <div>
-        <div>
-            Email: <input type="email" v-model="form.email" />
+<div>
+    <p class="title" style="text-align: center; color: #714dd2;">Welcome to FED College</p>
+    <br>
+    <div class="columns is-mobile">
+        <div class="card column is-half is-offset-one-quarter">
+        <section>
+            <b-field label="Email">
+                <b-input type="email" v-model="form.email"></b-input>
+            </b-field>
+
+            <b-field label="Password">
+                <b-input type="password" v-model="form.password" password-reveal></b-input>
+            </b-field>
             <br>
-            Password: <input type="password" v-model="form.password" />
-            <br>
-            <button @click="login(form)">Submit</button>
+            <div style="text-align: center;">
+            <b-button @click="login(form)" type="is-primary">Login</b-button>
+            </div>
+        </section>
         </div>
     </div>
+</div>
 </template>
 
 <script>

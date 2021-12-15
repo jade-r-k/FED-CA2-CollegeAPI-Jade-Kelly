@@ -5,10 +5,12 @@
         </div>
         <div v-else>
             <div style="text-align: center;">
-            <p class="title">Courses</p>
+            <p class="title" style="color: #714dd2;">Courses</p>
+            <br>
             <section>
-                <b-button @click="createCourse">Create New Course</b-button>
+                <b-button @click="createCourse" type="is-primary">Create New Course</b-button>
             </section>
+            <br>
         </div>
         <b-table :data="data" :columns="columns" @select="selected" striped focusable>
         </b-table>
@@ -29,17 +31,19 @@
                 columns: [{
                         field: 'code',
                         label: 'Code',
-                        sortable: true
+                        sortable: true,
+                        searchable: true,
                     },
                     {
                         field: 'title',
                         label: 'Title',
-                        sortable: true
+                        sortable: true,
+                        searchable: true,
                     },
                     {
                         field: 'level',
                         label: 'Level',
-                        sortable: true
+                        sortable: true,
                     },
                 ]
             }
