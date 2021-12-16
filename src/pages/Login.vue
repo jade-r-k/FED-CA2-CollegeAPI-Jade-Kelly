@@ -37,8 +37,8 @@
         data() {
             return {
                 form: {
-                    email: "jade@bloggs.com",
-                    password: "secret"
+                    email: "",
+                    password: ""
                 }
             }
         },
