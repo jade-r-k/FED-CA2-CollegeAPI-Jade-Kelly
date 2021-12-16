@@ -81,7 +81,9 @@ export default {
                 })
             },
             previousPage() {
-                this.$router.go(-1)
+                this.$router.push({
+                        name: "enrolments_index"
+                    })
             }
   }
 }

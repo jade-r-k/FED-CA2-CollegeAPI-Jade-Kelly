@@ -1,7 +1,10 @@
 <template>
     <div>
-        <h2>Edit Enrolment</h2>
-        <section>
+        <p class="title" style="text-align: center; color: #714dd2;">Edit Enrolment</p>
+    <br>
+    <div class="columns is-mobile">
+        <div class="card column is-half is-offset-one-quarter">
+            <section>
             <b-field label="Select a date">
             <b-datepicker
                 v-model="selected_date"
@@ -60,11 +63,13 @@
                 </option>
             </b-select>
         </b-field>
-            <section>
-                <b-button @click="submitForm()">Submit</b-button>
-                <b-button @click="cancel()">Cancel</b-button>
-            </section>
+            <div class="buttons is-centered">
+                <b-button @click="submitForm()" type="is-success">Submit</b-button>
+                <b-button @click="cancel()" type="is-danger">Cancel</b-button>
+            </div>
         </section>
+        </div>
+    </div>
     </div>
 </template>
 

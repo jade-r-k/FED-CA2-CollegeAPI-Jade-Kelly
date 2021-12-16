@@ -1,7 +1,10 @@
 <template>
   <div>
-      <h2>Edit Course</h2>
-      <section>
+      <p class="title" style="text-align: center; color: #714dd2;">Edit Course</p>
+    <br>
+    <div class="columns is-mobile">
+        <div class="card column is-half is-offset-one-quarter">
+            <section>
             <b-field label="Title" >
                 <b-input v-model="form.title"></b-input>
             </b-field>
@@ -17,11 +20,13 @@
             <b-field label="Level">
                 <b-numberinput v-model="form.level"></b-numberinput>
             </b-field>
-            <section>
-                <b-button @click="submitForm()">Submit</b-button>
-                <b-button @click="cancel()">Cancel</b-button>
-            </section>
+            <div class="buttons is-centered">
+                <b-button @click="submitForm()" type="is-success">Submit</b-button>
+                <b-button @click="cancel()" type="is-danger">Cancel</b-button>
+            </div>
         </section>
+        </div>
+    </div>
   </div>
 </template>
 

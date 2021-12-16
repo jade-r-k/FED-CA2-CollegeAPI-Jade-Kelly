@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <p class="title" style="text-align: center; color: #714dd2;">{{ lecturer.name }}</p>
+    <div>
+        <p class="title" style="text-align: center; color: #714dd2;">{{ lecturer.name }}</p>
         <br>
         <div class="columns is-mobile" style="text-align: center;">
             <div class="card column is-half is-offset-one-quarter">
@@ -22,20 +22,19 @@
         <p v-if="this.lecturer.enrolments.length === 0" style="text-align: center;">This lecturer has no enrolments</p>
         <b-table v-else :data="lecturer.enrolments" :columns="columns" striped>
         </b-table>
-  </div>
+    </div>
 </template>
 
 <script>
-import axios from '@/config'
+    import axios from '@/config'
 
-export default {
-  name: 'LecturersShow',
-  components: {
-  },
-  data(){
-      return {
-          lecturer: {},
-          columns: [{
+    export default {
+        name: 'LecturersShow',
+        components: {},
+        data() {
+            return {
+                lecturer: {},
+                columns: [{
                         field: 'id',
                         label: 'ID',
                         sortable: true
@@ -51,35 +50,34 @@ export default {
                         sortable: true,
                     }
                 ]
-      }
-  },
-  mounted(){
-      this.getData()
-  },
-  methods: {
-      getData() {
-          let token = localStorage.getItem('token')
+            }
+        },
+        mounted() {
+            this.getData()
+        },
+        methods: {
+            getData() {
+                let token = localStorage.getItem('token')
 
-          axios
-          .get(`/lecturers/${this.$route.params.id}`,
-          {
-              headers: {
-                  "Authorization" : `Bearer ${token}`
-                  }
-          })
-          .then(response => {
-              console.log(response.data)
-              this.lecturer = response.data.data
-          })
-          .catch(error =>  {
-            console.log(error)
-           // this.$emit('invalid-token')
-          })
-      },
-      deleteLecturer() {
-          let token = localStorage.getItem('token')
+                axios
+                    .get(`/lecturers/${this.$route.params.id}`, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    })
+                    .then(response => {
+                        console.log(response.data)
+                        this.lecturer = response.data.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        // this.$emit('invalid-token')
+                    })
+            },
+            deleteLecturer() {
+                let token = localStorage.getItem('token')
 
-          if (this.lecturer.enrolments.length === 0) {
+                if (this.lecturer.enrolments.length === 0) {
                     if (confirm("Do you really want to delete?")) {
                         axios.delete(`/lecturers/${this.$route.params.id}`, {
                                 headers: {
@@ -131,17 +129,19 @@ export default {
 
                     }
                 }
-      },
-      editLecturer() {
+            },
+            editLecturer() {
                 this.$router.push({
                     name: 'lecturer_edit'
                 })
             },
             previousPage() {
-                this.$router.go(-1)
+                this.$router.push({
+                    name: "lecturers_index"
+                })
             }
-  }
-}
+        }
+    }
 </script>
 
 <style scoped>
