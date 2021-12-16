@@ -29,7 +29,6 @@ export default new Vuex.Store({
                console.log(response.data.token)
                context.commit('SET_LOGGED_IN_STATUS', true)
                localStorage.setItem('token', response.data.token)
-               localStorage.setItem('user', response.data.name)
                router.push("/")
              })
              .catch(error => {
@@ -37,6 +36,24 @@ export default new Vuex.Store({
                console.log(error.response.data.error)
              })
 
+        },
+        register(context, credentials){
+            axios
+            .post('https://college-api-mo.herokuapp.com/api/register', {
+                name: credentials.name,
+                email: credentials.email,
+                password: credentials.password
+             })
+             .then(response => {
+               console.log(response.data.token)
+               context.commit('SET_LOGGED_IN_STATUS', true)
+               localStorage.setItem('token', response.data.token)
+               router.push("/")
+             })
+             .catch(error => {
+               console.log(error)
+               console.log(error.response.data.error)
+             })
         },
         logout(context){
             localStorage.removeItem('token')

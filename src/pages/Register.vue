@@ -1,10 +1,13 @@
 <template>
 <div>
-    <p class="title" style="text-align: center; color: #714dd2;">Login</p>
+    <p class="title" style="text-align: center; color: #714dd2;">Register</p>
     <br>
     <div class="columns is-mobile">
         <div class="card column is-half is-offset-one-quarter">
         <section>
+            <b-field label="Name">
+                <b-input v-model="form.name"></b-input>
+            </b-field>
             <b-field label="Email">
                 <b-input type="email" v-model="form.email"></b-input>
             </b-field>
@@ -14,7 +17,7 @@
             </b-field>
             <br>
             <div style="text-align: center;">
-            <b-button @click="login(form)" type="is-primary">Login</b-button>
+            <b-button @click="register(form)" type="is-primary">Register</b-button>
             </div>
         </section>
         </div>
@@ -29,14 +32,15 @@
     } from 'vuex'
 
     export default {
-        name: 'Login',
+        name: 'Register',
         components: {},
         props: {},
         data() {
             return {
                 form: {
-                    email: "jade@bloggs.com",
-                    password: "secret"
+                    name: "",
+                    email: "",
+                    password: ""
                 }
             }
         },
@@ -44,7 +48,7 @@
             ...mapState(['loggedIn'])
         },
         methods: {
-            ...mapActions(['login'])
+            ...mapActions(['register'])
         }
     }
 </script>

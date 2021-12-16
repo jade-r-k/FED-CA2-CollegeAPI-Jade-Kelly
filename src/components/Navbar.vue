@@ -28,7 +28,7 @@
                             <Icon style="margin-right: 4px;" icon="carbon:login" color="#6a6262" />
                             Login
                         </b-navbar-item>
-                        <b-navbar-item href="#">
+                        <b-navbar-item tag="router-link" :to="{ path: '/register' }">
                             <Icon style="margin-right: 4px;" icon="carbon:user-follow" color="#6a6262" />
                             Register
                         </b-navbar-item>
