@@ -5,22 +5,24 @@
         </div>
         <div v-else>
             <div style="text-align: center;">
-            <p class="title" style="color: #714dd2;">Lecturers</p>
+                <p class="title" style="color: #714dd2;">Lecturers</p>
+                <br>
+                <section>
+                    <b-button @click="createLecturer" type="is-primary">Create New Lecturer</b-button>
+                </section>
+            </div>
             <br>
-            <section>
-                <b-button @click="createLecturer" type="is-primary">Create New Lecturer</b-button>
-            </section>
-        </div>
-        <br>
-        <b-table :data="data" :columns="columns" @select="selected" striped focusable>
-        </b-table>
+            <b-table :data="data" :columns="columns" @select="selected" striped focusable>
+            </b-table>
         </div>
     </div>
 </template>
 
 <script>
     import axios from '@/config'
-    import { mapState } from 'vuex'
+    import {
+        mapState
+    } from 'vuex'
 
     export default {
         name: 'LecturersIndex',
@@ -46,8 +48,8 @@
             }
         },
         computed: {
-		...mapState(['loggedIn'])
-	},
+            ...mapState(['loggedIn'])
+        },
         mounted() {
             this.getData()
         },

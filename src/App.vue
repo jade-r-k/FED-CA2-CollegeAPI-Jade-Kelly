@@ -3,6 +3,7 @@
     <Navbar />
     <br>
     <div class="container">
+      <!-- Current Page -->
       <router-view />
     </div>
     <br>
@@ -11,29 +12,30 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue"
-import Footer from "@/components/Footer.vue"
+  //import components
+  import Navbar from "@/components/Navbar.vue"
+  import Footer from "@/components/Footer.vue"
 
-export default {
-  name: 'App',
-  components: {
-    Navbar,
-    Footer
-  },
-  data() {
-    return {
+  export default {
+    name: 'App',
+    components: {
+      Navbar,
+      Footer
+    },
+    data() {
+      return {
 
-    }
-  },
-  created(){
-   if(localStorage.getItem('token')) { 
-     this.$store.commit('SET_LOGGED_IN_STATUS', true)
-     }
-     else {
-      this.$store.commit('SET_LOGGED_IN_STATUS', false)
-     }
-  },
-}
+      }
+    },
+    created() {
+      //logged in status
+      if (localStorage.getItem('token')) {
+        this.$store.commit('SET_LOGGED_IN_STATUS', true)
+      } else {
+        this.$store.commit('SET_LOGGED_IN_STATUS', false)
+      }
+    },
+  }
 </script>
 
 <style>

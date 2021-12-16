@@ -1,81 +1,60 @@
 <template>
     <div>
         <p class="title" style="text-align: center; color: #714dd2;">Create Enrolment</p>
-    <br>
-    <div class="columns is-mobile">
-        <div class="card column is-half is-offset-one-quarter">
-            <section>
-            <b-field label="Select a date">
-            <b-datepicker
-                v-model="selected_date"
-                :show-week-number="showWeekNumber"
-                locale="en-GB"
-                placeholder="Click to select..."
-                icon="calendar-today"
-                icon-right-clickable
-                trap-focus>
-            </b-datepicker>
-        </b-field>
-            <b-field label="Select time">
-            <b-clockpicker
-                v-model="selected_time"
-                placeholder="Click to select..."
-                :hour-format="format">
+        <br>
+        <div class="columns is-mobile">
+            <div class="card column is-half is-offset-one-quarter">
+                <!-- Create enrolment form -->
+                <section>
+                    <b-field label="Select a date">
+                        <b-datepicker v-model="selected_date" :show-week-number="showWeekNumber" locale="en-GB"
+                            placeholder="Click to select..." icon="calendar-today" icon-right-clickable trap-focus>
+                        </b-datepicker>
+                    </b-field>
+                    <b-field label="Select time">
+                        <b-clockpicker v-model="selected_time" placeholder="Click to select..." :hour-format="format">
 
-                <b-button
-                    label="Now"
-                    type="is-primary"
-                    icon-left="clock"
-                    @click="time = new Date()" />
-                <b-button
-                    label="Clear"
-                    type="is-danger"
-                    icon-left="close"
-                    outlined
-                    @click="time = null" />
-            </b-clockpicker>
-        </b-field>
-        <b-field label="Status">
-            <b-select v-model="form.status" placeholder="Select a status">
-                <option value="assigned">Assigned</option>
-                    <option value="associate">Associate</option>
-                    <option value="career_break">Career Break</option>
-                    <option value="interested">Interested</option>
-            </b-select>
-        </b-field>
-        <b-field label="Course">
-            <b-select v-model="form.course_id" placeholder="Select a course">
-                <option
-                    v-for="option in courses"
-                    :value="option.id"
-                    :key="option.id">
-                    {{ option.title }}
-                </option>
-            </b-select>
-        </b-field>
-        <b-field label="Lecturer">
-            <b-select v-model="form.lecturer_id" placeholder="Select a lecturer">
-                <option
-                    v-for="option in lecturers"
-                    :value="option.id"
-                    :key="option.id">
-                    {{ option.name }}
-                </option>
-            </b-select>
-        </b-field>
-            <div class="buttons is-centered">
-                <b-button @click="submitForm()" type="is-success">Submit</b-button>
-                <b-button @click="cancel()" type="is-danger">Cancel</b-button>
+                            <b-button label="Now" type="is-primary" icon-left="clock" @click="time = new Date()" />
+                            <b-button label="Clear" type="is-danger" icon-left="close" outlined @click="time = null" />
+                        </b-clockpicker>
+                    </b-field>
+                    <b-field label="Status">
+                        <b-select v-model="form.status" placeholder="Select a status">
+                            <option value="assigned">Assigned</option>
+                            <option value="associate">Associate</option>
+                            <option value="career_break">Career Break</option>
+                            <option value="interested">Interested</option>
+                        </b-select>
+                    </b-field>
+                    <!-- Shows all courses and returns id of selected course -->
+                    <b-field label="Course">
+                        <b-select v-model="form.course_id" placeholder="Select a course">
+                            <option v-for="option in courses" :value="option.id" :key="option.id">
+                                {{ option.title }}
+                            </option>
+                        </b-select>
+                    </b-field>
+                    <!-- Shows all lecturers and returns id of selected lecturer -->
+                    <b-field label="Lecturer">
+                        <b-select v-model="form.lecturer_id" placeholder="Select a lecturer">
+                            <option v-for="option in lecturers" :value="option.id" :key="option.id">
+                                {{ option.name }}
+                            </option>
+                        </b-select>
+                    </b-field>
+                    <div class="buttons is-centered">
+                        <b-button @click="submitForm()" type="is-success">Submit</b-button>
+                        <b-button @click="cancel()" type="is-danger">Cancel</b-button>
+                    </div>
+                </section>
             </div>
-        </section>
         </div>
-    </div>
     </div>
 </template>
 
 <script>
-import axios from '@/config'
-import moment from 'moment'
+    import axios from '@/config'
+    import moment from 'moment'
 
     export default {
         name: 'CreateEnrolment',
@@ -97,17 +76,18 @@ import moment from 'moment'
             }
         },
         computed: {
-        format() {
-            return this.isAmPm ? '12' : '24'
-        }
-    },
+            format() {
+                return this.isAmPm ? '12' : '24'
+            }
+        },
         mounted() {
             this.getData()
         },
         methods: {
-            getData(){
+            getData() {
                 let token = localStorage.getItem('token')
 
+                //get all courses
                 axios
                     .get(`/courses`, {
                         headers: {
@@ -120,6 +100,7 @@ import moment from 'moment'
                     })
                     .catch(error => console.log(error))
 
+                //get all lecturers
                 axios
                     .get(`/lecturers`, {
                         headers: {
@@ -134,28 +115,28 @@ import moment from 'moment'
             },
             submitForm() {
                 let token = localStorage.getItem('token')
-                
+
                 axios.post('/enrolments', {
-                    date: this.form.date,
-                    time: this.form.time,
-                    status: this.form.status,
-                    course_id: this.form.course_id,
-                    lecturer_id: this.form.lecturer_id
-                }, {
-                    headers: {
-                  "Authorization" : `Bearer ${token}`
-                  }
-                })
-                .then(response =>{
-                    console.log(response.data)
-                    this.$router.push({
-                        name: "enrolments_index"
+                        date: this.form.date,
+                        time: this.form.time,
+                        status: this.form.status,
+                        course_id: this.form.course_id,
+                        lecturer_id: this.form.lecturer_id
+                    }, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
                     })
-                })
-                .catch(error => {
-                    console.log(error)
-                    console.log(error.response.data)
-                    alert("There was a problem making this enrolement. Check if the lecturer is already enroled to a course.")
+                    .then(response => {
+                        console.log(response.data)
+                        this.$router.push({
+                            name: "enrolments_index"
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        console.log(error.response.data)
+                        alert("There was a problem creating this enrolement.")
                     })
             },
             cancel() {

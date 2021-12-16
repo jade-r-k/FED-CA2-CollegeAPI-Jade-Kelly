@@ -2,6 +2,7 @@
     <div>
         <br>
         <br>
+        <!-- Footer -->
         <footer class="footer" style="background-color: #E0D8DE">
             <p>&copy; FED College 2021 by Jade Kelly</p>
         </footer>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <p class="title" style="text-align: center; color: #714dd2;">Enrolment</p>
+    <div>
+        <p class="title" style="text-align: center; color: #714dd2;">Enrolment</p>
         <br>
         <div class="columns is-mobile" style="text-align: center;">
             <div class="card column is-half is-offset-one-quarter">
@@ -15,78 +15,77 @@
                 </div>
             </div>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>
-import axios from '@/config'
+    import axios from '@/config'
 
-export default {
-  name: 'EnrolmentsShow',
-  components: {
-  },
-  data(){
-      return {
-          enrolment: {}
-      }
-  },
-  mounted(){
-      this.getData()
-  },
-  methods: {
-      getData() {
-          let token = localStorage.getItem('token')
+    export default {
+        name: 'EnrolmentsShow',
+        components: {},
+        data() {
+            return {
+                enrolment: {}
+            }
+        },
+        mounted() {
+            this.getData()
+        },
+        methods: {
+            getData() {
+                let token = localStorage.getItem('token')
 
-          axios
-          .get(`/enrolments/${this.$route.params.id}`,
-          {
-              headers: {
-                  "Authorization" : `Bearer ${token}`
-                  }
-          })
-          .then(response => {
-              console.log(response.data)
-              this.enrolment = response.data.data
-          })
-          .catch(error =>  {
-            console.log(error)
-           // this.$emit('invalid-token')
-          })
-      },
-      deleteEnrolment() {
-          let token = localStorage.getItem('token')
-          
-          if(confirm("Do you really want to delete?")){
-              axios.delete(`/enrolments/${this.$route.params.id}`,
-          {
-              headers: {
-                  "Authorization" : `Bearer ${token}`
-                  }
-          })
-          .then(response => {
-              console.log(response.data)
-              this.$router.push({
-                        name: "enrolments_index"
+                //get enrolment by id
+                axios
+                    .get(`/enrolments/${this.$route.params.id}`, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
                     })
-          })
-          .catch(error =>  {
-            console.log(error)
-           // this.$emit('invalid-token')
-          })
-          }
-      },
-      editEnrolment() {
+                    .then(response => {
+                        console.log(response.data)
+                        this.enrolment = response.data.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        // this.$emit('invalid-token')
+                    })
+            },
+            deleteEnrolment() {
+                let token = localStorage.getItem('token')
+
+                //delete enrolment by id
+                if (confirm("Do you really want to delete?")) {
+                    axios.delete(`/enrolments/${this.$route.params.id}`, {
+                            headers: {
+                                "Authorization": `Bearer ${token}`
+                            }
+                        })
+                        .then(response => {
+                            console.log(response.data)
+                            this.$router.push({
+                                name: "enrolments_index"
+                            })
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            // this.$emit('invalid-token')
+                        })
+                }
+            },
+            editEnrolment() {
                 this.$router.push({
                     name: 'enrolment_edit'
                 })
             },
             previousPage() {
                 this.$router.push({
-                        name: "enrolments_index"
-                    })
+                    name: "enrolments_index"
+                })
             }
-  }
-}
+        }
+    }
 </script>
 
 <style scoped>

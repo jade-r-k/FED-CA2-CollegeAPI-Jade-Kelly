@@ -5,22 +5,25 @@
         </div>
         <div v-else>
             <div style="text-align: center;">
-            <p class="title" style="color: #714dd2;">Enrolments</p>
+                <p class="title" style="color: #714dd2;">Enrolments</p>
+                <br>
+                <section>
+                    <b-button @click="createEnrolment" type="is-primary">Create New Enrolment</b-button>
+                </section>
+            </div>
             <br>
-            <section>
-                <b-button @click="createEnrolment" type="is-primary">Create New Enrolment</b-button>
-            </section>
-        </div>
-        <br>
-        <b-table :data="data" :columns="columns" @select="selected" striped focusable>
-        </b-table>
+            <!-- Table to display all enrolments -->
+            <b-table :data="data" :columns="columns" @select="selected" striped focusable>
+            </b-table>
         </div>
     </div>
 </template>
 
 <script>
     import axios from '@/config'
-    import { mapState } from 'vuex'
+    import {
+        mapState
+    } from 'vuex'
 
     export default {
         name: 'EnrolmentsIndex',
@@ -28,8 +31,7 @@
         data() {
             return {
                 data: [],
-                columns: [
-                    {
+                columns: [{
                         field: 'status',
                         label: 'Status',
                         sortable: true
@@ -50,8 +52,8 @@
             }
         },
         computed: {
-		...mapState(['loggedIn'])
-	},
+            ...mapState(['loggedIn'])
+        },
         mounted() {
             this.getData()
         },
@@ -59,6 +61,7 @@
             getData() {
                 let token = localStorage.getItem('token')
 
+                //get all enrolments
                 axios
                     .get(`/enrolments`, {
                         headers: {

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- Display data of course -->
         <p class="title" style="text-align: center; color: #714dd2;">{{ course.title }}</p>
         <br>
         <div class="columns is-mobile" style="text-align: center;">
@@ -12,14 +13,18 @@
                     {{ course.description }}
                 </div>
                 <div class="buttons is-centered">
+                    <!-- Links to EditCourse.vue -->
                     <b-button @click="editCourse" type="is-success">Edit</b-button>
+                    <!-- Delete course method -->
                     <b-button @click="deleteCourse" type="is-danger">Delete</b-button>
+                    <!-- Links to CoursesIndex.vue -->
                     <b-button @click="previousPage" type="is-primary">Return</b-button>
                 </div>
             </div>
         </div>
         <br>
         <p class="subtitle" style="text-align: center;">Enrolments</p>
+        <!-- If there are no enrolments display text instead of empty table -->
         <p v-if="this.course.enrolments.length === 0" style="text-align: center;">This course has no enrolments</p>
         <b-table v-else :data="course.enrolments" :columns="columns" striped>
         </b-table>
@@ -60,6 +65,7 @@
             getData() {
                 let token = localStorage.getItem('token')
 
+                //get course by id
                 axios
                     .get(`/courses/${this.$route.params.id}`, {
                         headers: {
@@ -78,6 +84,8 @@
             deleteCourse() {
                 let token = localStorage.getItem('token')
 
+                //delete course by id
+                //if the course has enrolments delete all enrolments first then delete course
                 if (this.course.enrolments.length === 0) {
                     if (confirm("Do you really want to delete?")) {
                         axios.delete(`/courses/${this.$route.params.id}`, {
@@ -131,11 +139,13 @@
                     }
                 }
             },
+            //go to edit course
             editCourse() {
                 this.$router.push({
                     name: 'course_edit'
                 })
             },
+            //go to course index
             previousPage() {
                 this.$router.push({
                     name: 'courses_index'
